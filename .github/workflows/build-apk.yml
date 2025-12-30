@@ -1,27 +1,28 @@
-name: Build Android APK
+name: Generate APK
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-      - name: Install Bubblewrap
-        run: npm install -g @bubblewrap/cli
-      - name: Build APK
+      - name: Build APK via PWABuilder API
         run: |
-          # This script will build a debug APK
-          bubblewrap build --skipSigning
-        continue-on-error: true
-      - name: Upload APK
+          # This connects to the PWABuilder cloud to build your APK perfectly
+          curl -X POST https://pwabuilder-cloud-apk.azurewebsites.net/process \
+          -H "Content-Type: application/json" \
+          -d '{
+            "url": "https://sreeesreejith-jpg.github.io/dcrg-apk/",
+            "name": "Pension Calc",
+            "packageId": "com.sree.pensioncalc",
+            "versionCode": 1,
+            "versionName": "1.0.0"
+          }' --output pension-app.zip
+      - name: Upload APK Zip
         uses: actions/upload-artifact@v3
         with:
-          name: app-release-apk
-          path: ./*.apk
+          name: pension-app-package
+          path: pension-app.zip
