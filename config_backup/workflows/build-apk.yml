@@ -1,0 +1,22 @@
+name: APK-Build
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create-APK
+        run: |
+          curl -f -X POST https://pwabuilder-cloud-apk.azurewebsites.net/process \
+          -H "Content-Type: application/json" \
+          -d '{"url":"https://sreeesreejith-jpg.github.io/dcrg-apk/","name":"Pension Calc","packageId":"com.sree.pensioncalc","versionCode":1,"versionName":"1.0.0"}' \
+          --output app.zip
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: pension-app
+          path: app.zip
