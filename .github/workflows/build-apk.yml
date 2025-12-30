@@ -8,10 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Build APK via PWABuilder API
         run: |
-          # This connects to the PWABuilder cloud to build your APK perfectly
           curl -X POST https://pwabuilder-cloud-apk.azurewebsites.net/process \
           -H "Content-Type: application/json" \
           -d '{
@@ -22,7 +21,7 @@ jobs:
             "versionName": "1.0.0"
           }' --output pension-app.zip
       - name: Upload APK Zip
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pension-app-package
           path: pension-app.zip
