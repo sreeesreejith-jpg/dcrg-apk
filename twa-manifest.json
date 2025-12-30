@@ -1,0 +1,21 @@
+{
+    "packageId": "com.sree.pensioncalc",
+    "host": "sreeesreejith-jpg.github.io",
+    "name": "Kerala Pension Calc",
+    "launcherName": "Pension Calc",
+    "display": "standalone",
+    "themeColor": "#2563EB",
+    "navigationColor": "#0F172A",
+    "backgroundColor": "#0F172A",
+    "enableNotifications": false,
+    "startUrl": "/dcrg-apk/",
+    "iconUrl": "https://sreeesreejith-jpg.github.io/dcrg-apk/app-icon.png",
+    "splashScreenFadeOutDuration": 300,
+    "appVersionCode": 1,
+    "appVersionName": "1.0.0",
+    "generatorApp": "bubblewrap-cli",
+    "webManifestUrl": "https://sreeesreejith-jpg.github.io/dcrg-apk/manifest.json",
+    "fallbackType": "customtabs",
+    "enableSiteSettingsShortcut": true,
+    "orientation": "default"
+}
