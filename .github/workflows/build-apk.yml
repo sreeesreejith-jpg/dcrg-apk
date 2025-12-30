@@ -1,4 +1,4 @@
-name: Generate APK
+name: PWA-to-APK
 on:
   push:
     branches: [ main ]
@@ -9,19 +9,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Build APK via PWABuilder API
-        run: |
-          curl -X POST https://pwabuilder-cloud-apk.azurewebsites.net/process \
-          -H "Content-Type: application/json" \
-          -d '{
-            "url": "https://sreeesreejith-jpg.github.io/dcrg-apk/",
-            "name": "Pension Calc",
-            "packageId": "com.sree.pensioncalc",
-            "versionCode": 1,
-            "versionName": "1.0.0"
-          }' --output pension-app.zip
-      - name: Upload APK Zip
+      - name: Build Android App
+        uses: pwa-builder/pwa-action@v1
+        with:
+          url: https://sreeesreejith-jpg.github.io/dcrg-apk/
+          name: "Kerala Pension Calc"
+          packageId: "com.sree.pensioncalc"
+          version: "1.0.0"
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: pension-app-package
-          path: pension-app.zip
+          name: android-apk
+          path: ./**/*.apk
